@@ -1,0 +1,21 @@
+FROM nvidia/cuda:11.1-cudnn8-devel-ubuntu18.04
+  
+RUN apt-get update
+
+RUN apt-get install -y wget \
+                vim \
+                cmake
+
+# install anaconda3
+RUN  wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-5.2.0-Linux-x86_64.sh -O ~/anaconda3.sh
+RUN bash ~/anaconda3.sh -b -p /home/h/anaconda3 \
+        && rm ~/anaconda3.sh
+ENV PATH /home/h/anaconda3/bin:$PATH
+
+# change mirror
+RUN mkdir ~/.pip \
+        && cd ~/.pip
+RUN echo -e "[global]\nindex-url = https://pypi.mirrors.ustc.edu.cn/simple/" >> ~/pip.conf
+
+# install tensorflow
+RUN /home/h/anaconda3/bin/pip install tensorflow-gpu
