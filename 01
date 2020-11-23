@@ -17,5 +17,3 @@ RUN mkdir ~/.pip \
         && cd ~/.pip
 RUN echo -e "[global]\nindex-url = https://pypi.mirrors.ustc.edu.cn/simple/" >> ~/pip.conf
 
-# install tensorflow
-RUN /home/h/anaconda3/bin/pip install tensorflow-gpu
